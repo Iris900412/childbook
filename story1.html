@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ㄚㄚ的故事</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Variables */
+        :root {
+            --primary-color: #ff7e7e;
+            --secondary-color: #8fc1e3;
+            --accent-color: #f9cb9c;
+            --text-color: #333;
+            --light-color: #f8f8f8;
+            --dark-color: #2c3e50;
+        }
+
+        /* Base Styles */
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 120px 20px 60px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Story Sections */
+        .story-section {
+            padding: 60px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.5s;
+            position: relative;
+        }
+
+        .story-section:nth-child(odd) {
+            background-color: white;
+        }
+
+        .story-section:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .story-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .story-text {
+            flex: 1;
+            padding: 0 20px;
+            min-width: 300px;
+        }
+
+        .story-text h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .story-text h3 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .story-text p {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .story-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .story-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .story-image img:hover {
+            transform: scale(1.03);
+        }
+
+        .lesson-box {
+            background-color: var(--accent-color);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-box h4 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            margin: 6px 0;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .nav-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.5);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .footer-section p, .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .bottom-footer {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #e86767;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background-color: var(--primary-color);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transition: right 0.3s;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .story-content {
+                flex-direction: column;
+            }
+
+            .story-text, .story-image {
+                flex: none;
+                width: 100%;
+            }
+
+            .nav-dots {
+                right: 5px;
+            }
+
+            .footer-section {
+                flex: none;
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .story-text h2 {
+                font-size: 28px;
+            }
+
+            .story-section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">ㄚㄚ的故事</a>
+                <button class="hamburger">☰</button>
+                <ul class="nav-links">
+                    <li><a href="#home">首頁</a></li>
+                    <li><a href="#story1">故事一</a></li>
+                    <li><a href="#story2">故事二</a></li>
+                    <li><a href="#story3">故事三</a></li>
+                    <li><a href="#story4">故事四</a></li>
+                    <li><a href="#story5">故事五</a></li>
+                    <li><a href="#about">關於</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>ㄚㄚ的一天冒險</h1>
+            <p>跟著ㄚㄚ一起學習生活中的重要價值與美德</p>
+        </div>
+    </section>
+
+    <!-- Story Sections -->
+    <section id="story1" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>1. 美好的早晨</h2>
+                    <p>故事從ㄚㄚ早上起床開始，她伸了個懶腰，準備迎接新的一天。她愉快地穿上衣服，整理好她的背包。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>以積極的態度開始新的一天，為即將到來的挑戰做好準備。</p>
+                    </div>
+                </div>
+                <div class="story-image">
+                    <img src="image1.jpeg" alt="ㄚㄚ的早晨">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story2" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="image2.jpeg" alt="美麗的花園">
+                </div>
+                <div class="story-text">
+                    <h2>2. 探索新世界</h2>
+                    <p>ㄚㄚ走出門外，發現了一座美麗的花園，裡面有各種各樣的花朵和小動物。她決定去探索一番。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>學會欣賞周圍的美景，尊重大自然。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story3" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>3. 幫助小動物</h2>
+                    <p>ㄚㄚ發現了一隻看起來很害怕的迷路小兔子。她幫助小兔子找到回家的路，並給予它安慰。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>學會幫助他人，特別是那些需要幫助的人，如動物和朋友。</p>
+                    </div>
+                </div>
+                <div class="story-image">
+                    <img src="image3.jpeg" alt="幫助小兔子">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story4" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="image4.jpeg" alt="和朋友一起玩">
+                </div>
+                <div class="story-text">
+                    <h2>4. 學會分享</h2>
+                    <p>ㄚㄚ遇到了一群小朋友，他們一起玩遊戲。ㄚㄚ學會了如何分享玩具和食物，大家都玩得很開心。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>分享使遊戲時間更加愉快，並加強友誼。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story5" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>5. 解決問題</h2>
+                    <p>ㄚㄚ的玩具壞了，所以她決定自己嘗試修理。經過一番努力，她成功地修好了玩具。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>面對問題時，不要放棄。嘗試不同的解決方案將導致成功。</p>
+                    </div>
+                </div>
+                <div class="story-image">
+                    <img src="image5.jpeg" alt="修理玩具">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story6" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="image6.jpeg" alt="幫助朋友做功課">
+                </div>
+                <div class="story-text">
+                    <h2>6. 友誼的力量</h2>
+                    <p>ㄚㄚ看到她的朋友在功課上遇到困難，耐心地幫助他們一起解決問題。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>幫助朋友建立信任並使友誼更加牢固。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story7" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>7. 學習堅持</h2>
+                    <p>ㄚㄚ嘗試學習如何騎自行車。雖然她摔了幾次，但她沒有放棄，最終學會了穩定地騎車。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>學習新技能需要耐心和毅力。失敗是學習過程的一部分。</p>
+                    </div>
+                </div>
+                <div class="story-image">
+                    <img src="image7.jpeg" alt="學習騎自行車">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story8" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="image8.jpeg" alt="感謝媽媽的幫助">
+                </div>
+                <div class="story-text">
+                    <h2>8. 感恩</h2>
+                    <p>一天結束後，ㄚㄚ感謝媽媽為她準備的美味晚餐。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>感恩是一個重要的價值觀，我們應該始終感謝周圍的人。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story9" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>9. 幫助社區</h2>
+                    <p>ㄚㄚ注意到公園裡有一些垃圾，決定撿起來扔進垃圾桶，保持環境的清潔。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>每個人都應該關心自己的環境，幫助維護公共場所的清潔。</p>
+                    </div>
+                </div>
+                <div class="story-image">
+                    <img src="image9.jpeg" alt="撿垃圾">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="story10" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="image10.jpeg" alt="睡前故事">
+                </div>
+                <div class="story-text">
+                    <h2>10. 快樂的睡前故事</h2>
+                    <p>一天結束了，ㄚㄚ和爸爸媽媽一起聽睡前故事。她感到幸福和滿足，期待著明天的冒險。</p>
+                    <div class="lesson-box">
+                        <h4>人生教訓：</h4>
+                        <p>回顧一天的經歷並感恩，同時培養良好的睡前習慣。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text" style="flex: 2;">
+                    <h2>關於ㄚㄚ的故事</h2>
+                    <p>這個故事旨在通過ㄚㄚ的日常冒險，向孩子們傳授重要的生活價值觀和技能。每個故事情節都包含一個特定的教訓，幫助孩子在成長過程中學習積極態度、尊重、幫助他人、分享、解決問題、友誼、堅持不懈、感恩、社區責任和良好習慣的重要性。</p>
+                    <p>這些故事適合家長與孩子一起閱讀，在閱讀過程中討論每個教訓，並鼓勵孩子在日常生活中實踐這些價值觀。</p>
+                    <p>希望ㄚㄚ的故事能夠成為孩子們成長道路上的良好伙伴！</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ㄚㄚ的故事</h3>
+                    <p>通過有趣的故事情節，幫助孩子們學習重要的生活技能和價值觀。</p>
+                    <div class="social-icons">
+                        <a href="#"><span>📘</span></a>
+                        <a href="#"><span>📱</span></a>
+                        <a href="#"><span>📷</span></a>
+                        <a href="#"><span>📹</span></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>快速導航</h3>
+                    <ul>
+                        <li><a href="#home">首頁</a></li>
+                        <li><a href="#story1">故事一</a></li>
+                        <li><a href="#story5">故事五</a></li>
+                        <li><a href="#story10">故事十</a></li>
+                        <li><a href="#about">關於</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>聯繫我們</h3>
+                    <p>電子郵件：info@yayastory.com</p>
+                    <p>電話：+886 123 456 789</p>
+                    <p>地址：台灣台北市ㄚㄚ大道123號</p>
+                </div>
+            </div>
+            <div class="bottom-footer">
+                <p>&copy; 2025 ㄚㄚ的故事。保留所有權利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="nav-dot" data-section="home"></div>
+        <div class="nav-dot" data-section="story1"></div>
+        <div class="nav-dot" data-section="story2"></div>
+        <div class="nav-dot" data-section="story3"></div>
+        <div class="nav-dot" data-section="story4"></div>
+        <div class="nav-dot" data-section="story5"></div>
+        <div class="nav-dot" data-section="story6"></div>
+        <div class="nav-dot" data-section="story7"></div>
+        <div class="nav-dot" data-section="story8"></div>
+        <div class="nav-dot" data-section="story9"></div>
+        <div class="nav-dot" data-section="story10"></div>
+        <div class="nav-dot" data-section="about"></div>
+    </div>
+
+    <!-- Scroll To Top Button -->
+    <div class="scroll-top">↑</div>
+
+    <!-- JavaScript -->
+    <script>
+        // DOM Elements
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('.story-section, .hero');
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+
+        // Toggle Mobile Menu
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        navLinksItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll to section when nav dot is clicked
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const sectionId = dot.getAttribute('data-section');
+                const section = document.getElementById(sectionId);
+                window.scrollTo({
+                    top: section.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Update active nav dot on scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+
+            // Show/hide scroll to top button
+            if (scrollPosition > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+
+            // Update active nav dot
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navDots.forEach(dot => {
+                        dot.classList.remove('active');
+                        if (dot.getAttribute('data-section') === sectionId) {
+                            dot.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Scroll to top when button is clicked
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        window.addEventListener('scroll', () => {
+            const storyContents = document.querySelectorAll('.story-content');
+            
+            storyContents.forEach(content => {
+                const contentPosition = content.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (contentPosition < screenPosition) {
+                    content.style.opacity = 1;
+                    content.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize - Set first nav dot as active
+        window.addEventListener('load', () => {
+            navDots[0].classList.add('active');
+            
+            // Apply initial animation to visible content
+            const storyContents = document.querySelectorAll('.story-content');
+            storyContents.forEach(content => {
+                content.style.opacity = 0;
+                content.style.transform = 'translateY(20px)';
+                content.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            setTimeout(() => {
+                const visibleContent = document.querySelector('.hero');
+                visibleContent.style.opacity = 1;
+                visibleContent.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
